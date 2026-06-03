@@ -12,7 +12,6 @@ The objective of this project is to develop an AI-powered logical fallacy detect
 
 * TXT
 * DOCX
-* PDF
 
 ### Planned Outputs
 
@@ -42,8 +41,6 @@ The first phase focused on building the foundational infrastructure required for
 Primary objectives included:
 
 * Development environment configuration
-* Dependency management
-* Multi-format document ingestion
 * Text extraction pipeline development
 * Text normalization and cleaning
 * Sentence segmentation
@@ -57,31 +54,13 @@ At the conclusion of Week 1, a complete preprocessing pipeline was established t
 
 The current architecture consists of the following stages:
 
-Document Input
-
-↓
-
-Document Parser
-
-↓
-
-Text Extraction Layer
-
-↓
-
-Text Cleaning Layer
-
-↓
-
-Sentence Segmentation Layer
-
-↓
-
-Structured Data Generation
-
-↓
-
-JSON Output
+1. Document Input
+2. Document Parser
+3. Text Extraction Layer
+4. Text Cleaning Layer
+5. Sentence Segmentation Layer
+6. Structured Data Generation
+7. JSON Output
 
 This architecture provides a modular foundation that can later be extended with:
 
