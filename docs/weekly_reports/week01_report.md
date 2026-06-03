@@ -1,800 +1,506 @@
-# WEEK 1 REPORT
+# Week 1 Report
 
-## Fallacy Detection and Argument Assessment System
+## Phase 1: Environment Setup, Document Processing & Data Pipeline Foundation
 
-### Phase 1: Environment Setup, Document Processing, and Data Pipeline Foundation
+## Project Overview
 
----
+### Objective
 
-# 1. Project Overview
+The objective of this project is to develop an AI-powered logical fallacy detection system capable of analyzing textual arguments, identifying fallacious reasoning patterns, and providing explainable outputs. The system is being designed as a complete NLP pipeline that transforms unstructured documents into structured representations suitable for argument mining and machine learning.
 
-## Problem Statement
-
-The objective of this project is to develop an Artificial Intelligence system capable of analyzing textual arguments and identifying logical fallacies present within them.
-
-Input formats:
+### Supported Input Formats
 
 * TXT
 * DOCX
 * PDF
 
-Output:
+### Planned Outputs
 
-* Detected fallacies
-* Location of fallacies
-* Confidence score
-* Argument quality score
+* Detected logical fallacies
+* Fallacy classification labels
+* Fallacy location within the document
+* Confidence scores
+* Argument quality assessment
+* Explanatory reasoning for predictions
 
-Example:
+### Example
 
-Input:
+**Input**
 
 Everyone believes electric cars are perfect, therefore they must be perfect.
 
-Output:
+**Output**
 
-Fallacy:
-Appeal to Popularity
+* Fallacy: Appeal to Popularity (Bandwagon)
+* Explanation: Popular acceptance does not establish factual correctness.
+* Confidence Score: 0.92
 
-Reason:
-Popularity does not imply correctness.
+## Week 1 Objectives
 
----
+The first phase focused on building the foundational infrastructure required for all subsequent machine learning and NLP components.
 
-# 2. Why Week 1 Exists
+Primary objectives included:
 
-Before building Machine Learning models, a system must first be able to:
+* Development environment configuration
+* Dependency management
+* Multi-format document ingestion
+* Text extraction pipeline development
+* Text normalization and cleaning
+* Sentence segmentation
+* Structured data generation
+* Version control integration
+* Repository organization
 
-1. Read documents
-2. Extract text
-3. Clean text
-4. Organize data
-5. Store processed information
+At the conclusion of Week 1, a complete preprocessing pipeline was established that converts raw documents into machine-readable structured data.
 
-Without these capabilities, no AI model can function.
+## System Architecture
 
-Week 1 therefore focuses entirely on building the foundation.
+The current architecture consists of the following stages:
 
----
-
-# 3. Software Installation
-
-## Python
-
-Python is the primary programming language used for:
-
-* Data Science
-* Machine Learning
-* Deep Learning
-* Natural Language Processing
-* Backend Development
-
-Verify installation:
-
-PowerShell:
-
-python --version
-
-Expected:
-
-Python 3.x.x
-
----
-
-## Visual Studio Code
-
-VS Code serves as the development environment.
-
-Benefits:
-
-* Syntax highlighting
-* Debugging
-* Git integration
-* Extension ecosystem
-
-Recommended Extensions:
-
-* Python
-* Pylance
-* Jupyter
-* GitLens
-* Error Lens
-
----
-
-## Git
-
-Git is a Version Control System.
-
-Purpose:
-
-* Track code changes
-* Restore previous versions
-* Collaborate with teams
-* Connect with GitHub
-
-Verify:
-
-git --version
-
----
-
-# 4. Understanding Project Structure
-
-Project Folder:
-
-fallacy-detector/
-
-data/
-raw/
-processed/
-
-src/
-ingestion/
-preprocessing/
-models/
-api/
-
-main.py
-
-Explanation:
-
-data/
-Stores all datasets.
-
-raw/
-Original files.
-
-processed/
-Cleaned data.
-
-src/
-Contains source code.
-
-ingestion/
-Reading documents.
-
-preprocessing/
-Cleaning text.
-
-models/
-Machine Learning code.
-
-api/
-Backend services.
-
-main.py
-Program entry point.
-
-This structure is common across most professional AI projects.
-
----
-
-# 5. Virtual Environment
-
-## Why Virtual Environments Exist
-
-Different projects often require different package versions.
-
-Example:
-
-Project A:
-numpy 1.25
-
-Project B:
-numpy 2.0
-
-Without isolation, package conflicts occur.
-
-Virtual environments solve this problem.
-
----
-
-Create Environment
-
-python -m venv venv
-
-Activate
-
-PowerShell:
-
-venv\Scripts\activate
-
-Successful activation:
-
-(venv)
-
-Every future AI project should use virtual environments.
-
----
-
-# 6. Package Installation
-
-Packages are reusable libraries.
-
-Install:
-
-pip install fastapi
-pip install uvicorn
-pip install python-docx
-pip install pdfplumber
-pip install PyMuPDF
-pip install spacy
-pip install pandas
-pip install numpy
-pip install scikit-learn
-pip install transformers
-pip install torch
-
-Purpose of Each Package
-
-FastAPI
-Backend API creation
-
-Uvicorn
-Runs FastAPI server
-
-python-docx
-Reads Word documents
-
-pdfplumber
-Reads PDFs
-
-PyMuPDF
-Advanced PDF extraction
-
-spaCy
-Natural Language Processing
-
-Pandas
-Data manipulation
-
-NumPy
-Numerical computation
-
-Scikit-learn
-Machine Learning
-
-Transformers
-Modern NLP models
-
-PyTorch
-Deep Learning
-
----
-
-# 7. Requirements File
-
-Purpose:
-
-Stores exact package versions.
-
-Create:
-
-pip freeze > requirements.txt
-
-Benefits:
-
-Recreate project anywhere.
-
-Install later:
-
-pip install -r requirements.txt
-
-This is standard industry practice.
-
----
-
-# 8. Document Ingestion
-
-Concept:
-
-Computers cannot understand PDFs directly.
-
-They first need text extraction.
-
-Document
+Document Input
 
 ↓
 
-Raw Text
+Document Parser
 
 ↓
 
-Processing
+Text Extraction Layer
 
-This stage is called Ingestion.
+↓
 
----
+Text Cleaning Layer
 
-TXT Reader
+↓
 
-Reads plain text files.
+Sentence Segmentation Layer
+
+↓
+
+Structured Data Generation
+
+↓
+
+JSON Output
+
+This architecture provides a modular foundation that can later be extended with:
+
+* Tokenization
+* Argument mining
+* Claim detection
+* Premise extraction
+* Feature engineering
+* Fallacy classification models
+* Explainability modules
+
+## Development Environment
+
+### Core Technologies
+
+| Technology | Purpose                      |
+| ---------- | ---------------------------- |
+| Python     | Primary development language |
+| VS Code    | Development environment      |
+| Git        | Version control              |
+| GitHub     | Remote repository management |
+
+### Environment Design Considerations
+
+The development environment was configured with reproducibility and scalability in mind. All project dependencies are isolated from the global Python installation to ensure:
+
+* Dependency consistency
+* Cross-platform compatibility
+* Easier deployment
+* Reproducible experimentation
+* Simplified collaboration
+
+## Dependency Stack
+
+The project currently integrates the following libraries:
+
+### Backend Infrastructure
+
+**FastAPI**
+
+* REST API development
+* Future model serving
+* Endpoint creation for document analysis
+
+**Uvicorn**
+
+* ASGI server
+* High-performance API execution
+
+### Document Processing
+
+**python-docx**
+
+* DOCX parsing
+* Paragraph extraction
+* Heading extraction
+
+**pdfplumber**
+
+* PDF text extraction
+* Page-level processing
+
+**PyMuPDF**
+
+* Advanced PDF parsing
+* Metadata extraction
+* Improved handling of complex PDF structures
+
+### Natural Language Processing
+
+**spaCy**
+
+* Tokenization
+* Sentence boundary detection
+* Part-of-speech tagging
+* Dependency parsing
+* Named Entity Recognition
+
+### Data Processing
+
+**Pandas**
+
+* Dataset construction
+* Tabular data manipulation
+
+**NumPy**
+
+* Numerical operations
+* Vectorized computations
+
+### Machine Learning
+
+**Scikit-learn**
+
+* Traditional ML algorithms
+* Data preprocessing utilities
+* Evaluation metrics
+
+**Transformers**
+
+* Transformer-based NLP architectures
+* Future fallacy classification models
+
+**PyTorch**
+
+* Deep learning framework
+* Neural network implementation
+* Transformer model training
+
+## Dependency Management
+
+Project dependencies are tracked using a requirements file.
+
+Benefits include:
+
+* Reproducible environments
+* Version consistency
+* Easier deployment
+* Simplified onboarding of contributors
+* Reduced dependency conflicts
+
+This establishes the foundation for future experimentation and model training workflows.
+
+## Document Ingestion System
+
+### Purpose
+
+Machine learning models cannot directly process document files. Therefore, a document ingestion layer was implemented to convert multiple file formats into a unified textual representation.
+
+### TXT Processing
+
+Capabilities:
+
+* Plain text reading
+* UTF-8 content extraction
+* Standardized text output
 
 Output:
 
-String
+* Raw document text
 
----
+### DOCX Processing
 
-DOCX Reader
+Capabilities:
 
-Uses python-docx.
-
-Reads:
-
-* Paragraphs
-* Headings
-* Text
+* Paragraph extraction
+* Heading extraction
+* Structured content retrieval
 
 Output:
 
-Single text string
+* Combined textual representation of the document
 
----
+### PDF Processing
 
-PDF Reader
+Capabilities:
 
-Uses pdfplumber.
-
-Process:
-
-PDF
-
-↓
-
-Pages
-
-↓
-
-Extract text from each page
-
-↓
-
-Combine pages
+* Page-level extraction
+* Multi-page document support
+* Text aggregation
 
 Output:
 
-Single text string
+* Unified text stream
 
----
+### Design Goal
 
-# 9. Natural Language Processing Basics
+Regardless of source format, every document is transformed into a standardized textual representation before entering the NLP pipeline.
 
-What is NLP?
+This abstraction simplifies downstream processing and model integration.
 
-Natural Language Processing enables computers to understand human language.
+## Text Preprocessing Pipeline
 
-Examples:
+### Motivation
 
-* ChatGPT
-* Grammarly
-* Google Translate
-* Voice Assistants
+Raw text often contains inconsistencies that negatively affect NLP performance.
 
-Our project uses NLP to understand arguments.
+Common issues include:
 
----
+* Irregular spacing
+* Formatting artifacts
+* Line break inconsistencies
+* Encoding irregularities
+* Extraction noise
 
-# 10. Text Cleaning
+### Cleaning Operations
 
-Raw text often contains:
+Implemented preprocessing tasks include:
 
-Extra spaces
+* Whitespace normalization
+* Line break cleanup
+* Text standardization
+* Basic formatting normalization
 
-Special symbols
+### Benefits
 
-Formatting issues
+* Improved downstream NLP accuracy
+* Reduced noise
+* More consistent feature generation
+* Better dataset quality
 
-Example:
+## Sentence Segmentation
 
-"Hello     world"
+### Purpose
 
-After cleaning:
+Logical fallacies frequently occur within individual statements or small groups of statements.
 
-"Hello world"
+Analyzing an entire document as a single block of text would reduce granularity and negatively impact future classification performance.
 
-Benefits:
+### Implementation
 
-* Faster processing
-* Better ML performance
-* Easier analysis
+Sentence segmentation was implemented using spaCy's sentence boundary detection system.
 
----
+Each document is transformed into a sequence of sentences that can later be:
 
-# 11. Sentence Segmentation
+* Independently analyzed
+* Annotated
+* Classified
+* Linked to argument structures
 
-Definition:
+### Benefits
 
-Breaking text into individual sentences.
+* Fine-grained analysis
+* Easier annotation workflows
+* Improved model training samples
+* Better explainability
+
+## NLP Foundation Using spaCy
+
+spaCy was selected as the primary NLP framework due to its efficiency, modularity, and production readiness.
+
+Current capabilities integrated into the project include:
+
+### Tokenization
+
+Splits text into linguistic units suitable for analysis.
 
 Example:
 
 Input:
-
-I love AI. AI is useful.
-
-Output:
-
-Sentence 1:
-I love AI.
-
-Sentence 2:
-AI is useful.
-
-Why Important?
-
-Most fallacies occur at sentence level.
-
----
-
-# 12. spaCy
-
-spaCy is a modern NLP framework.
-
-Capabilities:
-
-* Tokenization
-* POS Tagging
-* Dependency Parsing
-* NER
-* Sentence Detection
-
-Example:
-
-Text:
 
 AI is powerful.
 
 Tokens:
 
-AI
-is
-powerful
-.
+* AI
+* is
+* powerful
+* .
 
-Future Weeks will heavily use spaCy.
+### Part-of-Speech Tagging
 
----
+Provides grammatical information such as:
 
-# 13. Saving Processed Data
+* Nouns
+* Verbs
+* Adjectives
+* Adverbs
 
-After cleaning:
+### Dependency Parsing
 
-Save into JSON.
+Captures grammatical relationships between words.
 
-Example:
+This will be useful for:
 
-{
-"sentences":[
-"AI is powerful.",
-"Everyone believes AI."
-]
-}
+* Claim extraction
+* Premise identification
+* Argument structure analysis
 
-Benefits:
+### Named Entity Recognition
 
-* Easy storage
-* Easy model training
-* Human readable
+Identifies entities such as:
 
-JSON is widely used in APIs and ML pipelines.
+* People
+* Organizations
+* Locations
+* Dates
 
----
+These features will become increasingly important in future argument-mining stages.
 
-# 14. Program Flow
+## Structured Data Generation
 
-Current System Workflow
+### Output Format
 
-Document
+Processed documents are exported into JSON structures.
 
-↓
+Stored information may include:
 
-Reader
+* Document metadata
+* Cleaned text
+* Sentence lists
+* Future annotations
+* Model predictions
 
-↓
+### Advantages
 
-Text Extraction
+* Human-readable
+* Machine-readable
+* API-friendly
+* Easily expandable
+* Suitable for training datasets
 
-↓
+JSON serves as the primary interchange format between pipeline stages.
 
-Text Cleaning
+## Version Control Infrastructure
 
-↓
+### Git Integration
 
-Sentence Segmentation
+Git was configured to manage source code and project history.
 
-↓
+Key capabilities include:
 
-JSON Export
+* Change tracking
+* Snapshot management
+* Branching
+* Merging
+* Rollback support
 
-This completes the preprocessing pipeline.
+### GitHub Integration
 
----
+GitHub serves as the remote repository platform.
 
-# 15. Git Fundamentals
+Benefits include:
 
-What is Git?
-
-Git tracks every code change.
-
-Benefits:
-
-* Undo mistakes
-* Restore old versions
-* Team collaboration
-
----
-
-Initialize Repository
-
-git init
-
-Creates:
-
-.git/
-
-Git now tracks project changes.
-
----
-
-Check Status
-
-git status
-
-Shows:
-
-* Modified files
-* New files
-* Deleted files
-
----
-
-Add Files
-
-git add .
-
-Stages all files.
-
----
-
-Commit Changes
-
-git commit -m "Initial project setup"
-
-Creates a permanent snapshot.
-
----
-
-View History
-
-git log
-
-Displays all commits.
-
----
-
-# 16. GitHub Fundamentals
-
-GitHub is cloud storage for Git repositories.
-
-Benefits:
-
-* Backup
+* Remote backup
 * Collaboration
-* Portfolio building
+* Issue tracking
+* Project documentation
+* Continuous integration readiness
 
-Workflow:
+## Repository Structure
 
-Local Project
+The project structure was organized to support future expansion.
 
-↓
+Planned modules include:
 
-Git
+* Document ingestion
+* NLP preprocessing
+* Dataset generation
+* Argument mining
+* Fallacy detection
+* Model training
+* API services
+* Evaluation utilities
 
-↓
+This modular architecture promotes maintainability and scalability as the system grows.
 
-GitHub
+## Technical Skills Developed
 
----
+### Software Engineering
 
-Create Repository
+* Project architecture design
+* Repository organization
+* Version control workflows
 
-GitHub Website
+### Data Engineering
 
-↓
+* Multi-format document ingestion
+* Data normalization
+* Structured data generation
 
-New Repository
+### Natural Language Processing
 
-↓
+* Text preprocessing
+* Sentence segmentation
+* Linguistic feature extraction
+* spaCy pipeline integration
 
-Copy URL
+### Machine Learning Preparation
 
-Example:
+* Dataset pipeline development
+* Data serialization
+* Infrastructure preparation for model training
 
-https://github.com/username/fallacy-detector.git
+## Week 1 Deliverables
 
----
+Completed deliverables include:
 
-Connect Local Project
+* Python development environment setup
+* VS Code configuration
+* Git and GitHub integration
+* Virtual environment creation
+* Dependency installation and management
+* TXT document reader
+* DOCX document reader
+* PDF document reader
+* Text extraction pipeline
+* Text cleaning pipeline
+* Sentence segmentation pipeline
+* JSON export functionality
+* Repository structure initialization
+* NLP framework integration
 
-git remote add origin REPOSITORY_URL
+## Week 1 Outcome
 
-Verify:
+Week 1 successfully established the complete preprocessing foundation required for future machine learning development.
 
-git remote -v
+The system can now:
 
----
+* Ingest multiple document formats
+* Extract textual content
+* Normalize and clean text
+* Segment documents into sentences
+* Generate structured JSON outputs
+* Store data in a machine-learning-ready format
 
-Push Project
+This infrastructure provides the basis for all future argument analysis and fallacy detection components.
 
-git branch -M main
+## Next Phase: Week 2
 
-git push -u origin main
+Planned objectives for Week 2 include:
 
-Code is now stored on GitHub.
+* Argument Mining
+* Claim Detection
+* Premise Detection
+* Argument Structure Extraction
+* Annotation Framework Design
+* Dataset Construction
+* Initial Fallacy Labeling Strategy
+* Training Data Preparation
 
----
-
-# 17. Essential PowerShell Commands
-
-Current Directory
-
-pwd
-
-List Files
-
-dir
-
-Change Directory
-
-cd foldername
-
-Move Back
-
-cd ..
-
-Create Folder
-
-mkdir foldername
-
-Create File
-
-New-Item filename.txt
-
-Delete File
-
-Remove-Item filename.txt
-
-Delete Folder
-
-Remove-Item foldername -Recurse
-
-Clear Terminal
-
-cls
-
-Open VS Code
-
-code .
-
----
-
-# 18. Essential Git Commands Summary
-
-Initialize Repository
-
-git init
-
-Check Status
-
-git status
-
-Stage Files
-
-git add .
-
-Commit
-
-git commit -m "message"
-
-View History
-
-git log
-
-Create Branch
-
-git branch branchname
-
-Switch Branch
-
-git checkout branchname
-
-Push
-
-git push
-
-Pull
-
-git pull
-
-Clone Repository
-
-git clone URL
-
----
-
-# 19. Skills Learned During Week 1
-
-Software Engineering
-
-* Project Structure
-* Git
-* GitHub
-
-Python Development
-
-* Virtual Environments
-* Package Management
-
-Data Engineering
-
-* Data Ingestion
-* Data Storage
-
-NLP
-
-* Text Processing
-* Sentence Segmentation
-
-Machine Learning Preparation
-
-* Dataset Pipeline Design
-
-These skills transfer directly to:
-
-* AI Systems
-* Chatbots
-* Recommendation Systems
-* Computer Vision Projects
-* Cybersecurity ML Systems
-* Predictive Maintenance Projects
-* Robotics AI Applications
-
----
-
-# 20. Week 1 Deliverables
-
-Completed:
-
-✓ Python Setup
-
-✓ VS Code Setup
-
-✓ Git Setup
-
-✓ GitHub Setup
-
-✓ Virtual Environment
-
-✓ Dependency Installation
-
-✓ TXT Reader
-
-✓ DOCX Reader
-
-✓ PDF Reader
-
-✓ Text Cleaning
-
-✓ Sentence Segmentation
-
-✓ JSON Export
-
-✓ Project Structure
-
-Week 1 Status:
-FOUNDATION COMPLETE
-
-The project is now ready for Week 2:
-Argument Mining, Claim Detection, Premise Detection, Dataset Construction, and Initial Fallacy Annotation.
+**Week 1 Status:** Foundation Complete ✅
