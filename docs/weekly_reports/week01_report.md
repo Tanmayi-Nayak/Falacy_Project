@@ -1,6 +1,4 @@
-# Week 1 Report
-
-## Phase 1: Environment Setup, Document Processing & Data Pipeline Foundation
+# Week 1 Report: Environment Setup, Document Processing & Data Pipeline Foundation
 
 ## Project Overview
 
